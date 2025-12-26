@@ -1,0 +1,225 @@
+/* src/styles/global.css */
+
+/* Modern Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+/* Tokens */
+:root {
+    /* Palette A: Oat & Ink */
+    --color-bg: #FBF7F0;
+    --color-surface: #FFFFFF;
+    --color-text: #1B1B1F;
+    --color-muted: #5B5B66;
+    --color-border: rgba(27, 27, 31, 0.10);
+    --color-accent: #C65D3A;
+    --color-accent-soft: rgba(198, 93, 58, 0.14);
+    --color-accent-contrast: #FFFFFF;
+
+    /* Typography */
+    --font-heading: 'Libre Baskerville', serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+
+    --h1: clamp(2.2rem, 4vw, 3.2rem);
+    --h2: clamp(1.6rem, 2.5vw, 2.1rem);
+    --h3: 1.35rem;
+    --body-size: 1.05rem;
+    --line-height: 1.6;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    /* 8px */
+    --space-sm: 1rem;
+    /* 16px */
+    --space-md: 2rem;
+    /* 32px */
+    --space-lg: 4rem;
+    /* 64px */
+    --space-xl: clamp(4.5rem, 6vw, 6rem);
+    /* 72-96px */
+
+    --container-width: 1100px;
+    --radius-card: 16px;
+    --radius-pill: 9999px;
+
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Base Styles */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: var(--line-height);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: var(--h1);
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: var(--h2);
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: var(--h3);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Utilities */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: var(--space-sm);
+}
+
+.section {
+    padding-block: var(--space-xl);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.text-muted {
+    color: var(--color-muted);
+}
+
+/* Components: Button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8em 1.6em;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--color-accent-soft);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-surface);
+    border-color: var(--color-text);
+}
+
+/* Focus Visible States */
+.btn:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+details summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+    padding: 0.8em 1.6em;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    z-index: 1000;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: var(--space-sm);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

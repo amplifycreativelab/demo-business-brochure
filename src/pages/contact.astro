@@ -1,0 +1,310 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import FooterNAP from "../components/FooterNAP.astro";
+import AreasServed from "../components/AreasServed.astro";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Contact Us - Local Business Brochure">
+    <Header />
+
+    <main id="main-content">
+        <section class="section">
+            <div class="container">
+                <div class="page-header text-center mb-lg">
+                    <h1 class="h1">Get in Touch</h1>
+                    <p class="subtitle">
+                        We'd love to hear from you. Fill out the form below or
+                        give us a call.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    placeholder="Your Name"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    placeholder="your.email@example.com"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone (Optional)</label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="0400 000 000"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="business-type">Business Type</label>
+                                <select id="business-type" name="business-type">
+                                    <option value="" disabled selected
+                                        >Select an option</option
+                                    >
+                                    <option value="retail">Retail</option>
+                                    <option value="wellness">Wellness</option>
+                                    <option value="trades">Trades</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suburb">Suburb</label>
+                                <input
+                                    type="text"
+                                    id="suburb"
+                                    name="suburb"
+                                    placeholder="e.g. Fremantle"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    required
+                                    placeholder="How can we help?"></textarea>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <input
+                                    type="checkbox"
+                                    id="consent"
+                                    name="consent"
+                                />
+                                <label for="consent"
+                                    >I agree to the <a
+                                        href={base + "/privacy/"}
+                                        class="link">privacy policy</a
+                                    >.</label
+                                >
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-block"
+                                >Send Message</button
+                            >
+                        </form>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <h3 class="h3 mb-sm">Contact Details</h3>
+                            <address class="nap text-muted">
+                                <p>
+                                    <strong>Address:</strong><br />123 Local
+                                    Street, Perth WA 6000
+                                </p>
+                                <p>
+                                    <strong>Phone:</strong><br /><a
+                                        href="tel:+61800000000"
+                                        >+61 8 0000 0000</a
+                                    >
+                                </p>
+                                <p>
+                                    <strong>Email:</strong><br /><a
+                                        href="mailto:hello@example.com"
+                                        >hello@example.com</a
+                                    >
+                                </p>
+                            </address>
+                        </div>
+
+                        <div class="info-card mt-md">
+                            <h3 class="h3 mb-sm">Opening Hours</h3>
+                            <ul class="hours-list text-muted">
+                                <li>
+                                    <span>Monday - Friday:</span>
+                                    <span>9:00am - 5:00pm</span>
+                                </li>
+                                <li>
+                                    <span>Saturday:</span>
+                                    <span>10:00am - 2:00pm</span>
+                                </li>
+                                <li>
+                                    <span>Sunday:</span>
+                                    <span>Closed</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card mt-md bg-accent-soft">
+                            <h3 class="h3 mb-sm text-accent">
+                                What happens next?
+                            </h3>
+                            <ol class="next-steps-list">
+                                <li>We review your inquiry within 24 hours.</li>
+                                <li>
+                                    Our team will contact you to schedule a
+                                    consultation.
+                                </li>
+                                <li>
+                                    We provide a detailed proposal and quote.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <AreasServed />
+    </main>
+
+    <FooterNAP />
+</BaseLayout>
+
+<style>
+    .contact-grid {
+        display: grid;
+        gap: var(--space-xl);
+    }
+
+    @media (min-width: 900px) {
+        .contact-grid {
+            grid-template-columns: 3fr 2fr;
+        }
+    }
+
+    .contact-form-wrapper {
+        background-color: var(--color-surface);
+        padding: var(--space-lg);
+        border-radius: var(--radius-card);
+        border: 1px solid var(--color-border);
+    }
+
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+
+    label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        font-weight: 500;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.8em;
+        border: 1px solid var(--color-border);
+        border-radius: 8px; /* Slightly smaller than card */
+        font-family: inherit;
+        font-size: 1rem;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px var(--color-accent-soft);
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin-bottom: var(--space-md);
+    }
+
+    .checkbox-group input {
+        width: auto;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    .info-card {
+        background-color: var(--color-surface);
+        padding: var(--space-md);
+        border-radius: var(--radius-card);
+        border: 1px solid var(--color-border);
+    }
+
+    .bg-accent-soft {
+        background-color: var(--color-accent-soft);
+        border: none;
+    }
+    .text-accent {
+        color: var(--color-accent);
+    }
+
+    .nap p {
+        margin-bottom: var(--space-sm);
+    }
+
+    .hours-list {
+        list-style: none;
+    }
+
+    .hours-list li {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5em;
+        border-bottom: 1px dashed var(--color-border);
+        padding-bottom: 0.2em;
+    }
+
+    .next-steps-list {
+        padding-left: 1.2em;
+    }
+
+    .next-steps-list li {
+        margin-bottom: 0.5em;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .mb-lg {
+        margin-bottom: var(--space-lg);
+    }
+    .mb-sm {
+        margin-bottom: var(--space-sm);
+    }
+    .mt-md {
+        margin-top: var(--space-md);
+    }
+    .subtitle {
+        color: var(--color-muted);
+        max-width: 60ch;
+        margin-inline: auto;
+        font-size: 1.1rem;
+    }
+    .link {
+        color: var(--color-accent);
+        text-decoration: underline;
+    }
+</style>

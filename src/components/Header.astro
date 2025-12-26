@@ -1,0 +1,211 @@
+---
+const navItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about/" },
+    { label: "Services", href: "/services/" },
+    { label: "Testimonials", href: "/testimonials/" },
+];
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<header class="header">
+    <div class="container header-inner">
+        <a href={base + "/"} class="logo">
+            Local<span class="text-accent">Brochure.</span>
+        </a>
+
+        <nav class="desktop-nav">
+            <ul class="nav-list">
+                {
+                    navItems.map((item) => (
+                        <li>
+                            <a href={base + item.href} class="nav-link">
+                                {item.label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href={base + "/contact/"} class="btn btn-primary nav-cta"
+                >Contact</a
+            >
+
+            <!-- Mobile Menu Toggle -->
+            <details class="mobile-nav-toggle">
+                <summary class="burger" aria-label="Toggle menu">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </summary>
+                <div class="mobile-menu">
+                    <ul class="mobile-nav-list">
+                        {
+                            navItems.map((item) => (
+                                <li>
+                                    <a
+                                        href={base + item.href}
+                                        class="mobile-nav-link"
+                                    >
+                                        {item.label}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                        <li>
+                            <a
+                                href={base + "/contact/"}
+                                class="mobile-nav-link btn-mobile">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </div>
+</header>
+
+<script>
+    // Close details on link click
+    const details = document.querySelector(".mobile-nav-toggle");
+    const links = document.querySelectorAll(".mobile-nav-link");
+
+    links.forEach((link) => {
+        link.addEventListener("click", () => {
+            if (details) {
+                details.removeAttribute("open");
+            }
+        });
+    });
+
+    // Close on click outside
+    document.addEventListener("click", (e) => {
+        if (
+            details &&
+            details.hasAttribute("open") &&
+            !details.contains(e.target)
+        ) {
+            details.removeAttribute("open");
+        }
+    });
+</script>
+
+<style>
+    .header {
+        background-color: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+    }
+
+    .logo {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .nav-list {
+        display: flex;
+        gap: var(--space-md);
+        list-style: none;
+    }
+
+    .nav-link {
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+        color: var(--color-accent);
+    }
+
+    .header-actions {
+        display: flex;
+        gap: var(--space-sm);
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: block;
+        }
+        .mobile-nav-toggle {
+            display: none;
+        }
+        .nav-cta {
+            display: inline-flex;
+        }
+    }
+
+    /* Mobile Nav */
+    .mobile-nav-toggle {
+        display: block;
+        position: relative;
+    }
+
+    .burger {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .burger::-webkit-details-marker {
+        display: none;
+    }
+
+    .mobile-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-card);
+        padding: var(--space-md);
+        box-shadow: var(--shadow-lift);
+        width: 220px;
+        z-index: 101;
+    }
+
+    .mobile-nav-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .mobile-nav-link {
+        display: block;
+        padding: 0.5rem;
+    }
+
+    .btn-mobile {
+        color: var(--color-accent);
+        font-weight: 700;
+    }
+</style>

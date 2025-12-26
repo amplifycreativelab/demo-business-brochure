@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const {
+    title,
+    description = "Serving the local community with quality and care.",
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Helper for assets with base path
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+
+const jsonLD = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Local Brochure Demo",
+    image: new URL(`${base}/assets/images/og-image.png`, Astro.site),
+    url: Astro.site,
+    telephone: "+61 8 0000 0000",
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: "123 Local Street",
+        addressLocality: "Perth",
+        addressRegion: "WA",
+        postalCode: "6000",
+        addressCountry: "AU",
+    },
+    areaServed: ["Perth", "Fremantle", "Subiaco", "Victoria Park"],
+    openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "17:00",
+    },
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+        <link rel="canonical" href={canonicalURL} />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- Google Fonts: Libre Baskerville & Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>{title}</title>
+
+        <!-- Open Graph / Social -->
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta
+            property="og:image"
+            content={new URL(`${base}/assets/images/og-image.png`, Astro.site)}
+        />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+    </head>
+    <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <slot />
+    </body>
+</html>

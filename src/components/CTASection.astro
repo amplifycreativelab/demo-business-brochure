@@ -1,0 +1,67 @@
+---
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<section class="section cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to get started?</h2>
+                <p class="cta-desc">
+                    Contact us today for a free consultation. We're here to help
+                    you succeed.
+                </p>
+                <div class="cta-actions">
+                    <a href={base + "/contact/"} class="btn btn-primary"
+                        >Get in Touch</a
+                    >
+                    <p class="microcopy">No obligation • Fast response</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .cta-card {
+        background-color: var(--color-text);
+        color: #fff; /* Inverse theme */
+        padding: var(--space-xl) var(--space-md);
+        border-radius: var(--radius-card);
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .cta-content {
+        position: relative;
+        z-index: 1;
+        max-width: 600px;
+        margin-inline: auto;
+    }
+
+    .cta-title {
+        color: #fff;
+        margin-bottom: var(--space-sm);
+    }
+
+    .cta-desc {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: var(--space-md);
+        font-size: 1.1rem;
+    }
+
+    .cta-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+
+    .microcopy {
+        font-size: 0.85rem;
+        opacity: 0.6;
+    }
+</style>

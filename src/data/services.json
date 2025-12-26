@@ -1,0 +1,44 @@
+[
+    {
+        "id": "consultation",
+        "title": "Initial Consultation",
+        "description": "A comprehensive assessment of your needs to outline the best path forward.",
+        "icon": "chat",
+        "image": "service-consultation"
+    },
+    {
+        "id": "management",
+        "title": "Ongoing Management",
+        "description": "Reliable, day-to-day support to keep your operations running smoothly.",
+        "icon": "chart",
+        "image": "service-management"
+    },
+    {
+        "id": "development",
+        "title": "Strategy Development",
+        "description": "Customized strategic planning designed to achieve your specific goals.",
+        "icon": "bulb",
+        "image": "service-development"
+    },
+    {
+        "id": "maintenance",
+        "title": "Maintenance & Support",
+        "description": "Keep everything running at peak performance with our dedicated support team.",
+        "icon": "tool",
+        "image": "service-maintenance"
+    },
+    {
+        "id": "training",
+        "title": "Training & Workshops",
+        "description": "Empower your team with the skills they need to succeed independently.",
+        "icon": "book",
+        "image": "service-training"
+    },
+    {
+        "id": "audit",
+        "title": "Comprehensive Audit",
+        "description": "In-depth analysis to identify opportunities and areas for improvement.",
+        "icon": "search",
+        "image": "service-consultation"
+    }
+]

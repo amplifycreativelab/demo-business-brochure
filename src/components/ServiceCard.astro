@@ -1,0 +1,71 @@
+---
+interface Props {
+    icon: string;
+    title: string;
+    description: string;
+    href?: string;
+}
+
+const { icon, title, description, href = "#" } = Astro.props;
+---
+
+<a href={href} class="service-card">
+    <div class="icon-box">
+        <span class="material-icon">{icon.slice(0, 2).toUpperCase()}</span>
+    </div>
+    <h3 class="card-title">{title}</h3>
+    <p class="card-desc">{description}</p>
+    <span class="learn-more">Learn more &rarr;</span>
+</a>
+
+<style>
+    .service-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        padding: var(--space-md);
+        background-color: var(--color-surface);
+        border-radius: var(--radius-card);
+        border: 1px solid var(--color-border);
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+    .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-soft);
+        border-color: var(--color-accent-soft);
+    }
+
+    .icon-box {
+        width: 48px;
+        height: 48px;
+        background-color: var(--color-accent-soft);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-accent);
+        margin-bottom: var(--space-xs);
+        font-weight: bold;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+    }
+
+    .card-desc {
+        color: var(--color-muted);
+        line-height: 1.5;
+        flex-grow: 1;
+    }
+
+    .learn-more {
+        margin-top: var(--space-sm);
+        font-weight: 600;
+        color: var(--color-accent);
+        font-size: 0.9rem;
+    }
+</style>

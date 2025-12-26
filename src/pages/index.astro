@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import FooterNAP from "../components/FooterNAP.astro";
+import HeroSplit from "../components/HeroSplit.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import AreasServed from "../components/AreasServed.astro";
+import CTASection from "../components/CTASection.astro";
+import services from "../data/services.json";
+import testimonials from "../data/testimonials.json";
+import homeHero from "../assets/images/home-hero.png";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+	? import.meta.env.BASE_URL.slice(0, -1)
+	: import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Local Business Brochure - Home">
+	<Header />
+
+	<main id="main-content">
+		<HeroSplit
+			title="Reliable <span class='highlight'>Service</span> for Your Home & Business"
+			subtitle="We provide top-quality solutions tailored to your needs. Local, trusted, and always professional."
+			primaryCta="Get a Quote"
+			secondaryCta="Our Services"
+			image={homeHero}
+			chips={["Fully Insured", "5-Star Rated", "Family Owned"]}
+		/>
+
+		<section class="section bg-surface">
+			<div class="container">
+				<div class="section-header text-center mb-lg">
+					<h2 class="h2">Our Services</h2>
+					<p class="text-muted">
+						Comprehensive solutions for every situation.
+					</p>
+				</div>
+
+				<div class="grid-3">
+					{
+						services
+							.slice(0, 3)
+							.map((service) => (
+								<ServiceCard
+									title={service.title}
+									description={service.description}
+									icon={service.icon}
+									href={base + "/services/"}
+								/>
+							))
+					}
+				</div>
+
+				<div class="flex-center mt-lg">
+					<a href={base + "/services/"} class="btn btn-secondary"
+						>View All Services</a
+					>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+				<div class="section-header text-center mb-lg">
+					<h2 class="h2">What Our Clients Say</h2>
+				</div>
+				<div class="grid-3">
+					{
+						testimonials
+							.slice(0, 3)
+							.map((t) => (
+								<TestimonialCard
+									name={t.name}
+									location={t.location}
+									quote={t.quote}
+									category={t.category}
+								/>
+							))
+					}
+				</div>
+			</div>
+		</section>
+
+		<AreasServed />
+
+		<CTASection />
+	</main>
+
+	<FooterNAP />
+</BaseLayout>
+
+<style>
+	.text-center {
+		text-align: center;
+	}
+	.mb-lg {
+		margin-bottom: var(--space-lg);
+	}
+	.mt-lg {
+		margin-top: var(--space-lg);
+	}
+	.bg-surface {
+		background-color: var(--color-surface);
+	}
+</style>

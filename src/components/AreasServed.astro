@@ -1,0 +1,84 @@
+---
+import areas from "../data/areas.json";
+---
+
+<section class="section areas-served">
+    <div class="container">
+        <div class="split-layout">
+            <div class="content">
+                <h2 class="title">Proudly Serving Perth</h2>
+                <p class="intro">
+                    We are local and ready to help. Our team services the entire
+                    Perth metropolitan area, including:
+                </p>
+
+                <div class="chips">
+                    {areas.map((area) => <span class="chip">{area}</span>)}
+                </div>
+            </div>
+            <div class="map-placeholder">
+                <div class="map-visual">
+                    <span>Map of Perth</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .areas-served {
+        background-color: var(--color-bg);
+    }
+
+    .split-layout {
+        display: grid;
+        gap: var(--space-lg);
+    }
+
+    @media (min-width: 768px) {
+        .split-layout {
+            grid-template-columns: 1.5fr 1fr;
+            align-items: center;
+        }
+    }
+
+    .title {
+        margin-bottom: var(--space-sm);
+    }
+
+    .intro {
+        font-size: 1.1rem;
+        color: var(--color-muted);
+        margin-bottom: var(--space-md);
+    }
+
+    .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+    }
+
+    .chip {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        padding: 0.5em 1em;
+        border-radius: var(--radius-pill);
+        font-size: 0.9rem;
+    }
+
+    .map-placeholder {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background-color: var(--color-surface);
+        border-radius: var(--radius-card);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--color-border);
+    }
+
+    .map-visual {
+        color: var(--color-muted);
+        font-weight: 500;
+    }
+</style>

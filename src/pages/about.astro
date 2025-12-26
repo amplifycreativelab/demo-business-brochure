@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import FooterNAP from "../components/FooterNAP.astro";
+import HeroCentered from "../components/HeroCentered.astro";
+import CTASection from "../components/CTASection.astro";
+import AreasServed from "../components/AreasServed.astro";
+import aboutHero from "../assets/images/about-hero.png";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="About Us - Local Business Brochure">
+    <Header />
+
+    <main id="main-content">
+        <HeroCentered
+            title="A Local Team You Can <span class='highlight'>Rely On</span>"
+            subtitle="Founded in 2018, we have been serving the Perth community with dedication and integrity."
+            primaryCta="Contact Us"
+            secondaryCta="Our Values"
+            image={aboutHero}
+            chips={["Local", "Experienced", "Friendly"]}
+        />
+
+        <section class="section">
+            <div class="container two-col">
+                <div class="content">
+                    <h2 class="h2 mb-md">Our Story</h2>
+                    <p class="mb-md">
+                        We started with a simple mission: to provide
+                        high-quality services that our neighbors can trust. Over
+                        the years, we've grown from a small operation to a
+                        full-service team, but our core values remain the same.
+                    </p>
+                    <p>
+                        We believe in transparency, hard work, and building
+                        lasting relationships with our clients.
+                    </p>
+                </div>
+                <div class="visual">
+                    <div class="local-promise-card">
+                        <h3>Local Promise</h3>
+                        <p>
+                            We guarantee 100% satisfaction on every job. If it's
+                            not right, we'll make it right.
+                        </p>
+                        <div class="signature">The Team</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-surface">
+            <div class="container">
+                <h2 class="h2 text-center mb-lg">Our Values</h2>
+                <div class="grid-3">
+                    <div class="value-card">
+                        <h3>Integrity</h3>
+                        <p>
+                            We do what we say we're going to do, when we say
+                            we're going to do it.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h3>Quality</h3>
+                        <p>We never cut corners. Excellence is our standard.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>Community</h3>
+                        <p>
+                            We are proud to be part of the local community and
+                            give back whenever we can.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <CTASection />
+    </main>
+
+    <FooterNAP />
+</BaseLayout>
+
+<style>
+    .two-col {
+        display: grid;
+        gap: var(--space-xl);
+    }
+    @media (min-width: 768px) {
+        .two-col {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+    }
+    .mb-md {
+        margin-bottom: var(--space-md);
+    }
+    .mb-lg {
+        margin-bottom: var(--space-lg);
+    }
+    .text-center {
+        text-align: center;
+    }
+    .bg-surface {
+        background-color: var(--color-surface);
+    }
+
+    .local-promise-card {
+        background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+        padding: var(--space-lg);
+        border-radius: var(--radius-card);
+        position: relative;
+    }
+
+    .local-promise-card::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background-color: var(--color-accent-soft);
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    .local-promise-card h3 {
+        position: relative;
+        z-index: 1;
+        margin-bottom: var(--space-sm);
+    }
+
+    .signature {
+        margin-top: var(--space-md);
+        font-family: var(--font-heading);
+        font-style: italic;
+        color: var(--color-accent);
+    }
+
+    .value-card {
+        background-color: var(--color-bg);
+        padding: var(--space-md);
+        border-radius: var(--radius-card);
+    }
+
+    .value-card h3 {
+        margin-bottom: var(--space-sm);
+    }
+</style>

@@ -1,0 +1,291 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import FooterNAP from "../components/FooterNAP.astro";
+import CTASection from "../components/CTASection.astro";
+import FAQ from "../components/FAQ.astro";
+import { Image } from "astro:assets";
+import services from "../data/services.json";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "../assets/images/*.png",
+    { eager: true },
+);
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Our Services - Local Business Brochure">
+    <Header />
+
+    <main id="main-content">
+        <section class="section bg-surface header-section">
+            <div class="container text-center">
+                <h1 class="h1 mb-md">Our Services</h1>
+                <p class="intro-text">
+                    Professional solutions for every need. We tailor our
+                    approach to suit you.
+                </p>
+
+                <div class="filters">
+                    <span class="filter-chip active">All</span>
+                    <span class="filter-chip">Popular</span>
+                    <span class="filter-chip">For Homes</span>
+                    <span class="filter-chip">For Business</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container services-list">
+                {
+                    services.map((service, index) => (
+                        <div class="service-row" id={service.id}>
+                            <div class="service-info mt-md">
+                                <span class="service-icon">
+                                    {service.icon.slice(0, 2).toUpperCase()}
+                                </span>
+                                <h2 class="h2">{service.title}</h2>
+                                <p class="service-description">
+                                    {service.description}
+                                </p>
+
+                                <ul class="benefits-list">
+                                    <li>Customized approach</li>
+                                    <li>Experienced specialists</li>
+                                    <li>Satisfaction guaranteed</li>
+                                </ul>
+
+                                <a
+                                    href={base + "/contact/"}
+                                    class="btn btn-secondary mt-sm"
+                                >
+                                    Get a Quote
+                                </a>
+                            </div>
+                            <div class="service-visual">
+                                {images[
+                                    `../assets/images/${service.image}.png`
+                                ] ? (
+                                    <Image
+                                        src={
+                                            images[
+                                                `../assets/images/${service.image}.png`
+                                            ].default
+                                        }
+                                        alt={service.title}
+                                        class="visual-box"
+                                        width={600}
+                                        height={450}
+                                    />
+                                ) : (
+                                    <div class="visual-box" />
+                                )}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="section bg-surface">
+            <div class="container">
+                <h2 class="h2 text-center mb-lg">Compare Options</h2>
+                <div class="table-wrapper">
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th>Features</th>
+                                <th>Basic</th>
+                                <th>Standard</th>
+                                <th>Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Initial Consultation</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Priority Support</td>
+                                <td>-</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Dedicated Manager</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <FAQ />
+
+        <CTASection />
+    </main>
+
+    <FooterNAP />
+</BaseLayout>
+
+<style>
+    .header-section {
+        padding-bottom: var(--space-lg);
+    }
+
+    .intro-text {
+        max-width: 60ch;
+        margin-inline: auto;
+        color: var(--color-muted);
+        font-size: 1.1rem;
+        margin-bottom: var(--space-md);
+    }
+
+    .filters {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-xs);
+        flex-wrap: wrap;
+    }
+
+    .filter-chip {
+        padding: 0.5em 1.2em;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+
+    .filter-chip.active,
+    .filter-chip:hover {
+        background-color: var(--color-text);
+        color: #fff;
+        border-color: var(--color-text);
+    }
+
+    .services-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xl);
+    }
+
+    .service-row {
+        display: grid;
+        gap: var(--space-md);
+        padding-bottom: var(--space-xl);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .service-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    @media (min-width: 768px) {
+        .service-row {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .service-row:nth-child(even) .service-info {
+            order: 2;
+        }
+    }
+
+    .service-icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background: var(--color-accent-soft);
+        color: var(--color-accent);
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
+        margin-bottom: var(--space-sm);
+    }
+
+    .service-description {
+        color: var(--color-muted);
+        margin-bottom: var(--space-md);
+        font-size: 1.1rem;
+    }
+
+    .benefits-list {
+        list-style: none;
+        margin-bottom: var(--space-md);
+    }
+
+    .benefits-list li {
+        position: relative;
+        padding-left: 1.5em;
+        margin-bottom: 0.5em;
+    }
+
+    .benefits-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--color-accent);
+        font-weight: bold;
+    }
+
+    .visual-box {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background-color: var(--color-border);
+        border-radius: var(--radius-card);
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+        padding: var(--space-sm);
+        text-align: center;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .compare-table th:first-child,
+    .compare-table td:first-child {
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .bg-surface {
+        background-color: var(--color-surface);
+    }
+    .mt-md {
+        margin-top: var(--space-md);
+    }
+    .mt-sm {
+        margin-top: var(--space-sm);
+    }
+    .mb-md {
+        margin-bottom: var(--space-md);
+    }
+    .mb-lg {
+        margin-bottom: var(--space-lg);
+    }
+</style>

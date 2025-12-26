@@ -1,0 +1,138 @@
+---
+const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<footer class="footer section">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href={base + "/"} class="logo-footer"
+                    >Local<span class="text-accent">Brochure.</span></a
+                >
+                <p class="tagline">
+                    Warm, reliable, and serving our local community with pride
+                    since 2018.
+                </p>
+            </div>
+
+            <div class="footer-nap">
+                <h4 class="footer-heading">Contact Us</h4>
+                <address class="nap-list">
+                    <p class="nap-item">
+                        <span class="icon">📍</span> 123 Local Street, Perth WA 6000
+                    </p>
+                    <p class="nap-item">
+                        <span class="icon">📞</span>
+                        <a href="tel:+61800000000">+61 8 0000 0000</a>
+                    </p>
+                    <p class="nap-item">
+                        <span class="icon">✉️</span>
+                        <a href="mailto:hello@example.com">hello@example.com</a>
+                    </p>
+                </address>
+            </div>
+
+            <div class="footer-links">
+                <h4 class="footer-heading">Navigate</h4>
+                <ul>
+                    <li><a href={base + "/about/"}>About</a></li>
+                    <li><a href={base + "/services/"}>Services</a></li>
+                    <li><a href={base + "/testimonials/"}>Testimonials</a></li>
+                    <li><a href={base + "/contact/"}>Contact</a></li>
+                    <li><a href={base + "/privacy/"}>Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                &copy; {currentYear} Local Brochure Demo. All rights reserved.
+            </p>
+            <p class="areas-note">
+                Serving Perth Metro and surrounding suburbs.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background-color: var(--color-surface);
+        border-top: 1px solid var(--color-border);
+        padding-block: var(--space-xl) var(--space-lg);
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-lg);
+        margin-bottom: var(--space-xl);
+    }
+
+    .logo-footer {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: var(--space-sm);
+        display: inline-block;
+    }
+
+    .tagline {
+        color: var(--color-muted);
+        line-height: 1.6;
+    }
+
+    .footer-heading {
+        margin-bottom: var(--space-md);
+        font-size: 1.1rem;
+    }
+
+    .nap-list {
+        font-style: normal;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .nap-item {
+        display: flex;
+        gap: var(--space-xs);
+        align-items: center;
+        color: var(--color-muted);
+    }
+
+    .footer-links ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .footer-links a:hover,
+    .nap-item a:hover {
+        color: var(--color-accent);
+        text-decoration: underline;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid var(--color-border);
+        padding-top: var(--space-md);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+    }
+
+    @media (min-width: 600px) {
+        .footer-bottom {
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+        }
+    }
+</style>

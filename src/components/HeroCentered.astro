@@ -1,0 +1,162 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    title: string;
+    subtitle: string;
+    primaryCta: string;
+    secondaryCta: string;
+    image: string | ImageMetadata;
+    chips: string[];
+}
+
+const {
+    title,
+    subtitle,
+    primaryCta,
+    secondaryCta,
+    image,
+    chips = [],
+} = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<section class="hero-centered">
+    <div class="bg-image-container">
+        {
+            typeof image === "string" ? (
+                <img src={image} alt="Background" class="bg-image" />
+            ) : (
+                <Image src={image} alt="Background" class="bg-image" />
+            )
+        }
+        <div class="overlay"></div>
+    </div>
+
+    <div class="container content">
+        <h1 class="hero-title" set:html={title} />
+        <p class="hero-subtitle">{subtitle}</p>
+
+        <div class="hero-actions">
+            <a href={base + "/contact/"} class="btn btn-primary">{primaryCta}</a
+            >
+            <a href={base + "/services/"} class="btn btn-secondary-inverse"
+                >{secondaryCta}</a
+            >
+        </div>
+
+        {
+            chips.length > 0 && (
+                <div class="hero-chips">
+                    {chips.map((chip) => (
+                        <span class="chip">{chip}</span>
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</section>
+
+<style>
+    .hero-centered {
+        position: relative;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    .bg-image-container {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+
+    .bg-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.7)
+        );
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+    }
+
+    .hero-title {
+        color: #fff;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: var(--space-sm);
+    }
+
+    :global(.highlight) {
+        color: var(--color-accent);
+        /* In dark mode overlay, use simple color pop */
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: var(--space-md);
+        margin-inline: auto;
+        max-width: 60ch;
+    }
+
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-lg);
+    }
+
+    .btn-secondary-inverse {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8em 1.6em;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+    }
+
+    .btn-secondary-inverse:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: #fff;
+    }
+
+    .hero-chips {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-md);
+    }
+
+    .chip {
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0.9;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+</style>

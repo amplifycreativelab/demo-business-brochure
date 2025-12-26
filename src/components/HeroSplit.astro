@@ -1,0 +1,183 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    title: string;
+    subtitle: string;
+    primaryCta: string;
+    secondaryCta: string;
+    image: string | ImageMetadata;
+    chips: string[];
+}
+
+const {
+    title,
+    subtitle,
+    primaryCta,
+    secondaryCta,
+    image,
+    chips = [],
+} = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+---
+
+<section class="section hero-split">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <h1 class="hero-title" set:html={title} />
+                <p class="hero-subtitle">{subtitle}</p>
+
+                <div class="hero-actions">
+                    <a href={base + "/contact/"} class="btn btn-primary"
+                        >{primaryCta}</a
+                    >
+                    <a href={base + "/services/"} class="btn btn-secondary"
+                        >{secondaryCta}</a
+                    >
+                </div>
+
+                {
+                    chips.length > 0 && (
+                        <div class="hero-chips">
+                            {chips.map((chip) => (
+                                <div class="chip">
+                                    <span class="check-icon">✓</span> {chip}
+                                </div>
+                            ))}
+                        </div>
+                    )
+                }
+            </div>
+
+            <div class="hero-image-wrapper">
+                {
+                    typeof image === "string" ? (
+                        <img
+                            src={image}
+                            alt="Hero representation"
+                            class="hero-image"
+                        />
+                    ) : (
+                        <Image
+                            src={image}
+                            alt="Hero representation"
+                            class="hero-image"
+                        />
+                    )
+                }
+                <div class="hero-badge">
+                    Trusted<br />Local
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero-split {
+        padding-top: var(--space-lg);
+    }
+
+    .hero-grid {
+        display: grid;
+        gap: var(--space-xl);
+        align-items: center;
+    }
+
+    @media (min-width: 900px) {
+        .hero-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .hero-title {
+        margin-bottom: var(--space-sm);
+    }
+
+    :global(.highlight) {
+        position: relative;
+        white-space: nowrap;
+        z-index: 1;
+    }
+
+    :global(.highlight::before) {
+        content: "";
+        position: absolute;
+        left: -0.2em;
+        right: -0.2em;
+        bottom: 0.1em;
+        height: 0.6em;
+        background-color: var(--color-accent-soft);
+        border-radius: var(--radius-pill);
+        z-index: -1;
+        transform: rotate(-1deg);
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--color-muted);
+        margin-bottom: var(--space-md);
+        max-width: 50ch;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
+        flex-wrap: wrap;
+    }
+
+    .hero-chips {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .chip {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        font-size: 0.95rem;
+        color: var(--color-muted);
+    }
+
+    .check-icon {
+        color: var(--color-accent);
+        font-weight: bold;
+    }
+
+    .hero-image-wrapper {
+        position: relative;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius-card);
+        aspect-ratio: 4/3;
+        object-fit: cover;
+    }
+
+    .hero-badge {
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        background-color: var(--color-accent);
+        color: #fff;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 700;
+        line-height: 1.2;
+        transform: rotate(12deg);
+        box-shadow: var(--shadow-lift);
+        font-family: var(--font-heading);
+    }
+</style>

@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import FooterNAP from "../components/FooterNAP.astro";
+import CTASection from "../components/CTASection.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import testimonials from "../data/testimonials.json";
+---
+
+<BaseLayout title="Testimonials - Local Business Brochure">
+    <Header />
+
+    <main id="main-content">
+        <section class="section text-center">
+            <div class="container">
+                <h1 class="h1 mb-md">What People Are Saying</h1>
+                <div class="rating-summary">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text"
+                        >4.9/5 Average Rating based on 150+ reviews</span
+                    >
+                </div>
+
+                <div class="filters mt-md">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Retail</button>
+                    <button class="filter-btn">Wellness</button>
+                    <button class="filter-btn">Trades</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-surface">
+            <div class="container">
+                <div class="grid-3">
+                    {
+                        testimonials.map((t) => (
+                            <TestimonialCard
+                                name={t.name}
+                                location={t.location}
+                                quote={t.quote}
+                                category={t.category}
+                            />
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <CTASection />
+    </main>
+
+    <FooterNAP />
+</BaseLayout>
+
+<style>
+    .rating-summary {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xs);
+        font-size: 1.1rem;
+        color: var(--color-muted);
+    }
+
+    .stars {
+        color: #f59e0b; /* Gold */
+        font-size: 1.5rem;
+        letter-spacing: 0.2em;
+    }
+
+    .filters {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        background: none;
+        border: none;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        cursor: pointer;
+        padding-bottom: 0.2em;
+        border-bottom: 2px solid transparent;
+        color: var(--color-muted);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .mb-md {
+        margin-bottom: var(--space-md);
+    }
+    .mt-md {
+        margin-top: var(--space-md);
+    }
+    .bg-surface {
+        background-color: var(--color-surface);
+    }
+</style>
