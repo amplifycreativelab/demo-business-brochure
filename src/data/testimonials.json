@@ -2,84 +2,84 @@
     {
         "id": "1",
         "name": "Sarah Jenkins",
-        "location": "Fremantle",
+        "location": "Central District",
         "quote": "The team was incredibly professional and understood exactly what we needed. Highly recommended!",
         "category": "Retail"
     },
     {
         "id": "2",
         "name": "Michael Ross",
-        "location": "Subiaco",
+        "location": "Riverside",
         "quote": "A warm and welcoming experience from start to finish. They truly care about their clients.",
         "category": "Wellness"
     },
     {
         "id": "3",
         "name": "David Chen",
-        "location": "Perth CBD",
+        "location": "Old Quarter",
         "quote": "Efficient, reliable, and friendly. We've seen great results since working with them.",
         "category": "Trades"
     },
     {
         "id": "4",
         "name": "Emily Watson",
-        "location": "Cottesloe",
+        "location": "East Market",
         "quote": "They took the time to understand our unique situation and provided tailored solutions.",
         "category": "Wellness"
     },
     {
         "id": "5",
         "name": "James Miller",
-        "location": "Mount Lawley",
+        "location": "Harbor Walk",
         "quote": "Outstanding service from day one. I wouldn't hesitate to recommend them to anyone.",
         "category": "Retail"
     },
     {
         "id": "6",
         "name": "Rachel Thompson",
-        "location": "Victoria Park",
+        "location": "Studio Row",
         "quote": "The quality of work exceeded our expectations. A truly professional outfit.",
         "category": "Trades"
     },
     {
         "id": "7",
         "name": "Daniel Lee",
-        "location": "Applecross",
+        "location": "North Arcade",
         "quote": "Responsive, knowledgeable, and always available when we needed them. Top marks.",
         "category": "Other"
     },
     {
         "id": "8",
         "name": "Sophie Brown",
-        "location": "Claremont",
+        "location": "South Terrace",
         "quote": "A local business that genuinely cares about the community. Refreshing to work with.",
         "category": "Wellness"
     },
     {
         "id": "9",
         "name": "Thomas Wilson",
-        "location": "South Perth",
+        "location": "Museum Mile",
         "quote": "Clear communication, fair pricing, and excellent results. What more could you ask for?",
         "category": "Retail"
     },
     {
         "id": "10",
         "name": "Olivia Martinez",
-        "location": "Nedlands",
+        "location": "Garden Loop",
         "quote": "They made the whole process stress-free. I'm so glad we chose them.",
         "category": "Other"
     },
     {
         "id": "11",
         "name": "William Garcia",
-        "location": "Scarborough",
+        "location": "Uptown Steps",
         "quote": "Fantastic attention to detail and a genuine passion for their work. Highly satisfied.",
         "category": "Trades"
     },
     {
         "id": "12",
         "name": "Ava Johnson",
-        "location": "Joondalup",
+        "location": "Rivergate",
         "quote": "From quote to completion, everything was handled professionally. Five stars!",
         "category": "Other"
     }

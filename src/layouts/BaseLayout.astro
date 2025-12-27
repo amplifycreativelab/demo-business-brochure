@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import DemoLayout from "./DemoLayout.astro";
 
 interface Props {
     title: string;
@@ -16,30 +17,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const base = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL.slice(0, -1)
     : import.meta.env.BASE_URL;
-
-const jsonLD = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Local Brochure Demo",
-    image: new URL(`${base}/assets/images/og-image.png`, Astro.site),
-    url: Astro.site,
-    telephone: "+61 8 0000 0000",
-    address: {
-        "@type": "PostalAddress",
-        streetAddress: "123 Local Street",
-        addressLocality: "Perth",
-        addressRegion: "WA",
-        postalCode: "6000",
-        addressCountry: "AU",
-    },
-    areaServed: ["Perth", "Fremantle", "Subiaco", "Victoria Park"],
-    openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "09:00",
-        closes: "17:00",
-    },
-};
 ---
 
 <!doctype html>
@@ -51,6 +28,7 @@ const jsonLD = {
         <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
         <link rel="canonical" href={canonicalURL} />
         <meta name="generator" content={Astro.generator} />
+        <meta name="robots" content="noindex, nofollow" />
 
         <!-- Google Fonts: Libre Baskerville & Inter -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,11 +50,12 @@ const jsonLD = {
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-
-        <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+        <!-- Non-indexed portfolio demo: intentionally no schema -->
     </head>
     <body>
-        <a href="#main-content" class="skip-link">Skip to main content</a>
-        <slot />
+        <DemoLayout>
+            <a href="#main-content" class="skip-link">Skip to main content</a>
+            <slot />
+        </DemoLayout>
     </body>
 </html>
