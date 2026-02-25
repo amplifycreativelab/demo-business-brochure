@@ -25,18 +25,28 @@ const { icon, title, description, href = "#" } = Astro.props;
         gap: var(--space-sm);
         padding: var(--space-md);
         background-color: var(--color-surface);
-        border-radius: var(--radius-card);
         border: 1px solid var(--color-border);
-        transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         height: 100%;
+        position: relative;
     }
 
     .service-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-soft);
-        border-color: var(--color-accent-soft);
+        background-color: var(--color-border);
+        color: var(--color-bg);
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0px var(--color-accent);
+    }
+
+    .service-card:hover .card-desc,
+    .service-card:hover .learn-more,
+    .service-card:hover .icon-box,
+    .service-card:hover .card-title {
+        color: var(--color-bg);
+    }
+
+    .service-card:hover .icon-box {
+        background-color: var(--color-accent);
     }
 
     .icon-box {
@@ -49,23 +59,32 @@ const { icon, title, description, href = "#" } = Astro.props;
         justify-content: center;
         color: var(--color-accent);
         margin-bottom: var(--space-xs);
-        font-weight: bold;
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        transition: inherit;
     }
 
     .card-title {
-        font-size: 1.25rem;
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+        transition: inherit;
     }
 
     .card-desc {
         color: var(--color-muted);
         line-height: 1.5;
         flex-grow: 1;
+        transition: inherit;
     }
 
     .learn-more {
         margin-top: var(--space-sm);
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
         color: var(--color-accent);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        transition: inherit;
     }
 </style>

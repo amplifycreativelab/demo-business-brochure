@@ -4,117 +4,481 @@ const logoUrl =
   "https://amplifycreativelab.com/images/logo/amplify-creative-lab-logo-perth-WA.svg";
 ---
 
-<div class="demo-branding" role="note" aria-label="Concept demo attribution">
-  <a
-    class="demo-branding__link"
-    href={mainSiteUrl}
-    target="_blank"
-    rel="nofollow noopener noreferrer"
+<!-- Floating re-open pill (only visible when modal is closed) -->
+<div class="demo-pill" id="demo-pill">
+  <button
+    class="demo-pill__btn"
+    id="demo-branding-trigger"
+    aria-haspopup="dialog"
+    aria-controls="demo-branding-modal"
+    aria-expanded="true"
+    type="button"
   >
-    <span class="demo-branding__logo-wrap">
-      <img class="demo-branding__logo" src={logoUrl} alt="" decoding="async" />
-    </span>
-    <span class="demo-branding__label">Concept Demo</span>
-    <span class="demo-branding__by">by Amplify Creative Lab</span>
-    <span class="demo-branding__sub">High-performance Astro build - Motion-first design</span>
-  </a>
+    <span class="demo-pill__dot" aria-hidden="true"></span>
+    <span>Demo</span>
+  </button>
+</div>
+
+<!-- Backdrop -->
+<div class="demo-backdrop" id="demo-branding-backdrop" aria-hidden="true"></div>
+
+<!-- Modal panel — plain div (not native dialog to avoid display:none) -->
+<div
+  class="demo-modal"
+  id="demo-branding-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="demo-modal-heading"
+>
+  <!-- ── Close button — large, unmissable ── -->
+  <button
+    class="demo-modal__close"
+    id="demo-modal-close"
+    type="button"
+    aria-label="Close demo info"
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M14 4L4 14M4 4l10 10"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <div class="demo-modal__inner">
+    <!-- Logo -->
+    <div class="demo-modal__logo-wrap">
+      <img
+        class="demo-modal__logo"
+        src={logoUrl}
+        alt="Amplify Creative Lab logo"
+        decoding="async"
+        loading="eager"
+        width="240"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="demo-modal__body">
+      <p class="demo-modal__eyebrow" id="demo-modal-heading">Concept Demo</p>
+      <h2 class="demo-modal__title">Built by Amplify Creative Lab</h2>
+      <p class="demo-modal__desc">
+        A non-indexed portfolio demo showcasing a high-performance Astro build
+        with motion-first design. No real services are offered here.
+      </p>
+
+      <ul class="demo-modal__tags" aria-label="Tech highlights">
+        <li>Astro</li>
+        <li>Motion-first</li>
+        <li>Tailwind CSS</li>
+        <li>Performance-optimised</li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+    <a
+      class="demo-modal__cta"
+      href={mainSiteUrl}
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    >
+      Visit amplifycreativelab.com
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 14 14"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M2.5 7h9M8 3.5L11.5 7 8 10.5"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </div>
 </div>
 
 <style>
-  .demo-branding {
+  /* ─────────────────── Floating pill ─────────────────── */
+  .demo-pill {
     position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 9999;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9000;
+    /* Hidden when modal is open */
+    opacity: 0;
     pointer-events: none;
-    max-width: 260px;
-  }
-
-  .demo-branding__link {
-    pointer-events: auto;
-    display: grid;
-    gap: 2px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: rgba(0, 0, 0, 0.78);
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(4px);
     transition:
-      opacity 160ms ease,
-      transform 160ms ease,
-      background-color 160ms ease;
-    opacity: 0.78;
+      opacity 220ms ease,
+      transform 220ms ease;
   }
 
-  .demo-branding__link:hover {
-    opacity: 0.95;
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.86);
+  .demo-pill.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
-  .demo-branding__logo-wrap {
-    justify-self: start;
+  .demo-pill__btn {
     display: inline-flex;
     align-items: center;
-    padding: 6px 8px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  .demo-branding__logo {
-    display: block;
-    height: 60px;
-    width: auto;
-  }
-
-  .demo-branding__label {
+    gap: 7px;
+    padding: 8px 14px 8px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(0, 0, 0, 0.65);
+    font-family: inherit;
     font-size: 11px;
-    letter-spacing: 0.08em;
+    font-weight: 500;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-    opacity: 0.75;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      opacity 180ms ease;
   }
 
-  .demo-branding__by {
-    font-size: 12px;
+  .demo-pill__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+  }
+
+  .demo-pill__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #9a7b5c;
+    flex-shrink: 0;
+    animation: demo-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes demo-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(0.65);
+    }
+  }
+
+  /* ─────────────────── Backdrop ─────────────────── */
+  .demo-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9100;
+    background: rgba(14, 10, 8, 0.38);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+  }
+
+  .demo-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ─────────────────── Modal ─────────────────── */
+  .demo-modal {
+    /* Plain div — we control visibility entirely with CSS */
+    display: block;
+    position: fixed;
+    z-index: 9200;
+    bottom: 20px;
+    right: 20px;
+    width: min(360px, calc(100vw - 32px));
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(252, 249, 244, 0.96);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.18),
+      0 6px 20px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+
+    /* Closed state */
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s 320ms;
+  }
+
+  .demo-modal.is-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+    transition:
+      opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s 0s;
+  }
+
+  /* ─── Close button — large, obvious ─── */
+  .demo-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0, 0, 0, 0.14);
+    background: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition:
+      background 160ms,
+      color 160ms,
+      transform 160ms,
+      box-shadow 160ms;
+  }
+
+  .demo-modal__close:hover {
+    background: #1e2022;
+    color: #fff;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ─── Inner scroll wrapper ─── */
+  .demo-modal__inner {
+    max-height: min(90dvh, 560px);
+    overflow-y: auto;
+  }
+
+  /* ─── Logo ─── */
+  .demo-modal__logo-wrap {
+    padding: 28px 28px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .demo-modal__logo {
+    display: block;
+    width: 200px;
+    height: auto;
+    /* No background, no border — popup surface provides the contrast */
+  }
+
+  /* ─── Body ─── */
+  .demo-modal__body {
+    padding: 18px 28px 0;
+  }
+
+  .demo-modal__eyebrow {
+    font-size: 10px;
     font-weight: 600;
-    line-height: 1.2;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9a7b5c;
+    margin-bottom: 5px;
   }
 
-  .demo-branding__sub {
-    font-size: 11px;
-    line-height: 1.2;
-    opacity: 0.72;
+  .demo-modal__title {
+    font-family: "Playfair Display", serif;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #1e2022;
+    margin-bottom: 10px;
   }
 
+  .demo-modal__desc {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(30, 32, 34, 0.62);
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .demo-modal__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+  }
+
+  .demo-modal__tags li {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #4e5846;
+    background: rgba(78, 88, 70, 0.09);
+    border: 1px solid rgba(78, 88, 70, 0.18);
+    border-radius: 100px;
+    padding: 4px 11px;
+  }
+
+  /* ─── CTA ─── */
+  .demo-modal__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 28px 28px;
+    padding: 13px 20px;
+    border-radius: 10px;
+    background: #162719;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition:
+      background 180ms,
+      transform 180ms;
+  }
+
+  .demo-modal__cta:hover {
+    background: #1f3622;
+    transform: translateY(-1px);
+  }
+
+  /* ─── Dark mode ─── */
   @media (prefers-color-scheme: dark) {
-    .demo-branding__link {
+    .demo-pill__btn {
       border-color: rgba(255, 255, 255, 0.14);
-      background: rgba(0, 0, 0, 0.44);
-      color: rgba(255, 255, 255, 0.86);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: rgba(18, 14, 10, 0.82);
+      color: rgba(255, 255, 255, 0.65);
     }
 
-    .demo-branding__link:hover {
-      background: rgba(0, 0, 0, 0.56);
+    .demo-modal {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: rgba(22, 18, 12, 0.96);
+    }
+
+    .demo-modal__title {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .demo-modal__desc {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .demo-modal__close {
+      border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .demo-modal__close:hover {
+      background: rgba(255, 255, 255, 0.9);
+      color: #1e2022;
+    }
+
+    .demo-modal__logo {
+      background: rgba(255, 255, 255, 0.9);
     }
   }
 
+  /* ─── Mobile ─── */
   @media (max-width: 480px) {
-    .demo-branding {
-      right: 12px;
-      left: 12px;
-      max-width: none;
+    .demo-pill {
+      right: 14px;
+      bottom: 14px;
+    }
+    .demo-modal {
+      bottom: 74px;
+      right: 14px;
+      left: 14px;
+      width: auto;
     }
   }
 
   @media print {
-    .demo-branding {
-      display: none;
+    .demo-pill,
+    .demo-modal,
+    .demo-backdrop {
+      display: none !important;
     }
   }
 </style>
+
+<script>
+  (() => {
+    const pill = document.getElementById("demo-pill") as HTMLElement | null;
+    const trigger = document.getElementById(
+      "demo-branding-trigger",
+    ) as HTMLButtonElement | null;
+    const backdrop = document.getElementById(
+      "demo-branding-backdrop",
+    ) as HTMLElement | null;
+    const modal = document.getElementById(
+      "demo-branding-modal",
+    ) as HTMLElement | null;
+    const closeBtn = document.getElementById(
+      "demo-modal-close",
+    ) as HTMLButtonElement | null;
+
+    if (!pill || !trigger || !backdrop || !modal || !closeBtn) return;
+
+    const isOpen = () => modal.classList.contains("is-open");
+
+    const open = () => {
+      modal.classList.add("is-open");
+      backdrop.classList.add("is-open");
+      pill.classList.remove("is-visible");
+      modal.removeAttribute("aria-hidden");
+      modal.removeAttribute("inert");
+      trigger.setAttribute("aria-expanded", "true");
+      // Don't lock scroll — the modal is non-intrusive
+      // Focus the close button for keyboard users
+      setTimeout(() => closeBtn.focus({ preventScroll: true }), 50);
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      backdrop.classList.remove("is-open");
+      pill.classList.add("is-visible");
+      modal.setAttribute("aria-hidden", "true");
+      modal.setAttribute("inert", "");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.focus({ preventScroll: true });
+    };
+
+    // ── Open on page load ──
+    // small delay so the page entrance animation isn't competing
+    setTimeout(open, 600);
+
+    trigger.addEventListener("click", () => (isOpen() ? close() : open()));
+    closeBtn.addEventListener("click", close);
+    backdrop.addEventListener("click", close);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) close();
+    });
+  })();
+</script>
+

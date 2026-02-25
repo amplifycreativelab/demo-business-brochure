@@ -34,44 +34,48 @@ video {
 
 /* Tokens */
 :root {
-    /* Palette A: Oat & Ink */
-    --color-bg: #FBF7F0;
+    /* Palette A: Stark Brutalist Luxury */
+    --color-bg: #F4F2EC;
+    /* Warm natural paper */
     --color-surface: #FFFFFF;
-    --color-text: #1B1B1F;
-    --color-muted: #5B5B66;
-    --color-border: rgba(27, 27, 31, 0.10);
-    --color-accent: #C65D3A;
-    --color-accent-soft: rgba(198, 93, 58, 0.14);
+    /* Pure white surface */
+    --color-text: #111110;
+    /* Nearly black */
+    --color-muted: #66635C;
+    /* Warm gray */
+    --color-border: #111110;
+    /* Solid dark border */
+    --color-accent: #E53E17;
+    /* Vibrant Vermilion */
+    --color-accent-soft: rgba(229, 62, 23, 0.15);
     --color-accent-contrast: #FFFFFF;
 
     /* Typography */
-    --font-heading: 'Libre Baskerville', serif;
-    --font-body: 'Inter', system-ui, sans-serif;
+    --font-heading: 'Instrument Serif', serif;
+    --font-body: 'Outfit', system-ui, sans-serif;
 
-    --h1: clamp(2.2rem, 4vw, 3.2rem);
-    --h2: clamp(1.6rem, 2.5vw, 2.1rem);
-    --h3: 1.35rem;
-    --body-size: 1.05rem;
-    --line-height: 1.6;
+    --h1: clamp(3rem, 7vw, 6rem);
+    --h2: clamp(2rem, 4vw, 3.5rem);
+    --h3: clamp(1.25rem, 2vw, 1.75rem);
+    --body-size: 1.1rem;
+    --line-height: 1.45;
 
     /* Spacing */
     --space-xs: 0.5rem;
-    /* 8px */
     --space-sm: 1rem;
-    /* 16px */
     --space-md: 2rem;
-    /* 32px */
     --space-lg: 4rem;
-    /* 64px */
-    --space-xl: clamp(4.5rem, 6vw, 6rem);
-    /* 72-96px */
+    --space-xl: clamp(5rem, 8vw, 8rem);
 
-    --container-width: 1100px;
-    --radius-card: 16px;
-    --radius-pill: 9999px;
+    --container-width: 1200px;
 
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
-    --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.06);
+    /* Severe forms */
+    --radius-card: 0px;
+    --radius-pill: 0px;
+
+    /* Hard brutalist shadows */
+    --shadow-soft: 4px 4px 0px var(--color-border);
+    --shadow-lift: 8px 8px 0px var(--color-border);
 }
 
 /* Base Styles */
@@ -81,6 +85,8 @@ body {
     font-family: var(--font-body);
     font-size: var(--body-size);
     line-height: var(--line-height);
+    background-image: radial-gradient(#111110 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
 }
 
 h1,
@@ -152,32 +158,43 @@ a {
     justify-content: center;
     padding: 0.8em 1.6em;
     border-radius: var(--radius-pill);
-    font-weight: 600;
+    /* 0px */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.95rem;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
-    border: none;
+    border: 1px solid var(--color-border);
 }
 
 .btn-primary {
     background-color: var(--color-accent);
     color: var(--color-accent-contrast);
+    border-color: var(--color-border);
+    box-shadow: 4px 4px 0px var(--color-border);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--color-accent-soft);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--color-border);
+    background-color: var(--color-border);
+    color: var(--color-surface);
 }
 
 .btn-secondary {
     background-color: transparent;
     border: 1px solid var(--color-border);
     color: var(--color-text);
+    box-shadow: 4px 4px 0px var(--color-border);
 }
 
 .btn-secondary:hover {
-    background-color: var(--color-surface);
-    border-color: var(--color-text);
+    background-color: var(--color-border);
+    color: var(--color-surface);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--color-accent);
 }
 
 /* Focus Visible States */
